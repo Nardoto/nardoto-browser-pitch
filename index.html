@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nardoto Browser - Apresentação Técnica</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #22d3ee;
+            --accent: #f472b6;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--light);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0.15;
+            top: -200px;
+            right: -200px;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
+            opacity: 0.1;
+            bottom: -100px;
+            left: -100px;
+            animation: pulse 6s ease-in-out infinite reverse;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid var(--primary);
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeInUp 0.8s ease 0.6s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(99, 102, 241, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+
+        /* Problem Section */
+        #problema {
+            background: linear-gradient(180deg, var(--darker) 0%, var(--dark) 100%);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            background: rgba(244, 114, 182, 0.05);
+        }
+
+        .problem-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .problem-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Solution Section */
+        #solucao {
+            background: var(--dark);
+        }
+
+        .solution-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .browser-mockup {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(34, 211, 238, 0.1));
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            position: relative;
+        }
+
+        .browser-header {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .browser-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .browser-dot.red { background: #ef4444; }
+        .browser-dot.yellow { background: #eab308; }
+        .browser-dot.green { background: #22c55e; }
+
+        .browser-content {
+            background: var(--darker);
+            border-radius: 12px;
+            padding: 2rem;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .extension-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(99, 102, 241, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            border: 1px solid var(--primary);
+        }
+
+        .solution-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .feature-item:hover {
+            border-color: var(--secondary);
+            background: rgba(34, 211, 238, 0.05);
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .feature-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .feature-item p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Extensions Section */
+        #extensoes {
+            background: linear-gradient(180deg, var(--dark) 0%, var(--darker) 100%);
+        }
+
+        .extensions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .extension-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .extension-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .extension-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .extension-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+
+        .extension-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .extension-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .extension-tier {
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .tier-basic { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .tier-vip { background: rgba(249, 115, 22, 0.2); color: #f97316; }
+        .tier-gold { background: rgba(234, 179, 8, 0.2); color: #eab308; }
+
+        .extension-desc {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .extension-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .ext-feature {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: var(--primary);
+        }
+
+        /* Architecture Section */
+        #arquitetura {
+            background: var(--darker);
+        }
+
+        .arch-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .arch-layer {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .arch-layer::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 20px;
+            background: var(--primary);
+        }
+
+        .arch-layer:last-child::after {
+            display: none;
+        }
+
+        .arch-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .arch-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .arch-item {
+            background: rgba(99, 102, 241, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        /* Business Model */
+        #modelo {
+            background: var(--dark);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'MAIS POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            padding: 0.25rem 1rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .plan-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        /* Stats Section */
+        #numeros {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--dark) 100%);
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Technical Section */
+        #tecnico {
+            background: var(--darker);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .tech-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .tech-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .tech-card ul {
+            list-style: none;
+        }
+
+        .tech-card li {
+            padding: 0.5rem 0;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tech-card li::before {
+            content: '→';
+            color: var(--primary);
+        }
+
+        .code-block {
+            background: var(--darker);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .code-block .keyword { color: var(--accent); }
+        .code-block .string { color: var(--secondary); }
+        .code-block .comment { color: var(--gray); }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            color: var(--gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .solution-container { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .tech-grid { grid-template-columns: 1fr; }
+            .pricing-card.featured { transform: none; }
+            .nav-links { display: none; }
+        }
+
+        /* Animations on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">NARDOTO</div>
+        <ul class="nav-links">
+            <li><a href="#problema">Problema</a></li>
+            <li><a href="#solucao">Solucao</a></li>
+            <li><a href="#extensoes">Extensoes</a></li>
+            <li><a href="#arquitetura">Arquitetura</a></li>
+            <li><a href="#modelo">Modelo</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">Apresentacao Tecnica - Confidencial</div>
+            <h1>Navegador <span>Chromium Customizado</span> para Criadores</h1>
+            <p>Browser proprietario compilado do zero com extensoes premium pre-instaladas, sistema de licenciamento nativo e zero telemetria do Google.</p>
+            <div class="cta-buttons">
+                <a href="#arquitetura" class="btn btn-primary">Ver Arquitetura</a>
+                <a href="#extensoes" class="btn btn-secondary">Conhecer Extensoes</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="problema">
+        <h2 class="section-title">O Problema</h2>
+        <p class="section-subtitle">Criadores de conteudo enfrentam barreiras tecnicas que impedem a escalabilidade</p>
+
+        <div class="problem-grid">
+            <div class="problem-card fade-in">
+                <div class="problem-icon">🔒</div>
+                <h3>Bloqueios do Chrome</h3>
+                <p>Google bloqueia extensoes em segundo plano, limita automacoes e impoe throttling que destroi produtividade.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="problem-icon">💸</div>
+                <h3>Custos Fragmentados</h3>
+                <p>R$ 500-1.000/mes gastos em ferramentas dispersas sem integracao nem processo definido.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="problem-icon">🐌</div>
+                <h3>Processos Manuais</h3>
+                <p>20-40h/semana perdidas em tarefas repetitivas que poderiam ser automatizadas com as ferramentas certas.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="problem-icon">📊</div>
+                <h3>Dados Coletados</h3>
+                <p>Google rastreia tudo. Dados de navegacao, extensoes instaladas, historico - tudo vendido para anunciantes.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="solucao">
+        <h2 class="section-title">A Solucao: Nardoto Browser</h2>
+        <p class="section-subtitle">Navegador Chromium compilado do zero com foco em produtividade para criadores</p>
+
+        <div class="solution-container">
+            <div class="browser-mockup fade-in">
+                <div class="browser-header">
+                    <div class="browser-dot red"></div>
+                    <div class="browser-dot yellow"></div>
+                    <div class="browser-dot green"></div>
+                </div>
+                <div class="browser-content">
+                    <div style="color: var(--gray); font-size: 0.9rem;">Extensoes Ativas (Premium)</div>
+                    <div class="extension-badge">✨ VEO3 Automator</div>
+                    <div class="extension-badge">🎵 Suno Automator</div>
+                    <div class="extension-badge">🎨 Midjourney Auto</div>
+                    <div class="extension-badge">📝 Mass Prompter</div>
+                    <div class="extension-badge">🔄 Wisk Automator</div>
+                    <div style="margin-top: auto; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                        <span style="color: #22c55e;">●</span> Todas rodando em velocidade maxima
+                    </div>
+                </div>
+            </div>
+
+            <div class="solution-features">
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">⚡</div>
+                    <div>
+                        <h4>Zero Throttling</h4>
+                        <p>Extensoes rodam em velocidade maxima mesmo em segundo plano. Sem limitacoes do Chrome.</p>
+                    </div>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">🔐</div>
+                    <div>
+                        <h4>Licenciamento Nativo</h4>
+                        <p>Sistema de autenticacao integrado ao navegador. Hardware ID + Firebase = impossivel piratear.</p>
+                    </div>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">🚫</div>
+                    <div>
+                        <h4>Zero Telemetria</h4>
+                        <p>Removido todo tracking do Google. Seus dados sao seus. Privacidade real.</p>
+                    </div>
+                </div>
+                <div class="feature-item fade-in">
+                    <div class="feature-icon">📦</div>
+                    <div>
+                        <h4>Tudo Incluso</h4>
+                        <p>Instala uma vez, tem tudo. Extensoes premium ja vem configuradas e prontas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="extensoes">
+        <h2 class="section-title">Extensoes Premium</h2>
+        <p class="section-subtitle">17+ ferramentas de automacao prontas para usar</p>
+
+        <div class="extensions-grid">
+            <div class="extension-card fade-in">
+                <div class="extension-header">
+                    <span class="extension-name">VEO3 Automator</span>
+                    <span class="extension-tier tier-gold">GOLD</span>
+                </div>
+                <p class="extension-desc">Automatiza geracao de videos no Google Veo 3. Envia prompts em massa, monitora progresso, baixa automaticamente.</p>
+                <div class="extension-features">
+                    <span class="ext-feature">Prompts em massa</span>
+                    <span class="ext-feature">Auto-download</span>
+                    <span class="ext-feature">Fila inteligente</span>
+                </div>
+            </div>
+
+            <div class="extension-card fade-in">
+                <div class="extension-header">
+                    <span class="extension-name">Mass Prompter</span>
+                    <span class="extension-tier tier-gold">GOLD</span>
+                </div>
+                <p class="extension-desc">Envia prompts em massa para Claude, ChatGPT e Gemini. Ideal para geracao de roteiros e conteudo em escala.</p>
+                <div class="extension-features">
+                    <span class="ext-feature">Multi-IA</span>
+                    <span class="ext-feature">Templates</span>
+                    <span class="ext-feature">Exportacao</span>
+                </div>
+            </div>
+
+            <div class="extension-card fade-in">
+                <div class="extension-header">
+                    <span class="extension-name">Suno Automator</span>
+                    <span class="extension-tier tier-gold">GOLD</span>
+                </div>
+                <p class="extension-desc">Gera musicas automaticamente no Suno AI. Perfeito para trilhas sonoras de videos sem copyright.</p>
+                <div class="extension-features">
+                    <span class="ext-feature">Geracao em lote</span>
+                    <span class="ext-feature">Estilos pre-definidos</span>
+                </div>
+            </div>
+
+            <div class="extension-card fade-in">
+                <div class="extension-header">
+                    <span class="extension-name">Wisk Automator</span>
+                    <span class="extension-tier tier-vip">VIP</span>
+                </div>
+                <p class="extension-desc">Automatiza fluxos no Wisk.com para producao de conteudo com IA.</p>
+                <div class="extension-features">
+                    <span class="ext-feature">Fluxos automaticos</span>
+                    <span class="ext-feature">Integracao IA</span>
+                </div>
+            </div>
+
+            <div class="extension-card fade-in">
+                <div class="extension-header">
+                    <span class="extension-name">Tradutor Universal</span>
+                    <span class="extension-tier tier-basic">BASICO</span>
+                </div>
+                <p class="extension-desc">Traduz qualquer texto selecionado instantaneamente usando IA. Suporta 50+ idiomas.</p>
+                <div class="extension-features">
+                    <span class="ext-feature">Selecao rapida</span>
+                    <span class="ext-feature">50+ idiomas</span>
+                </div>
+            </div>
+
+            <div class="extension-card fade-in">
+                <div class="extension-header">
+                    <span class="extension-name">Auto Downloader</span>
+                    <span class="extension-tier tier-basic">BASICO</span>
+                </div>
+                <p class="extension-desc">Baixa automaticamente midias geradas por IA. Suporta VEO, Suno, Midjourney e mais.</p>
+                <div class="extension-features">
+                    <span class="ext-feature">Multi-plataforma</span>
+                    <span class="ext-feature">Organizacao auto</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="arquitetura">
+        <h2 class="section-title">Arquitetura Tecnica</h2>
+        <p class="section-subtitle">Stack completo do navegador compilado</p>
+
+        <div class="arch-diagram">
+            <div class="arch-layer fade-in">
+                <div class="arch-title">CAMADA DE APRESENTACAO</div>
+                <div class="arch-items">
+                    <span class="arch-item">Chromium UI Customizado</span>
+                    <span class="arch-item">Branding Nardoto</span>
+                    <span class="arch-item">Tela de Login Nativa</span>
+                    <span class="arch-item">Dashboard Extensoes</span>
+                </div>
+            </div>
+
+            <div class="arch-layer fade-in">
+                <div class="arch-title">CAMADA DE EXTENSOES</div>
+                <div class="arch-items">
+                    <span class="arch-item">Component Extensions (Built-in)</span>
+                    <span class="arch-item">Chrome Web Store (Habilitada)</span>
+                    <span class="arch-item">Background Scripts Sem Throttling</span>
+                    <span class="arch-item">Manifest V3 Otimizado</span>
+                </div>
+            </div>
+
+            <div class="arch-layer fade-in">
+                <div class="arch-title">CAMADA DE AUTENTICACAO</div>
+                <div class="arch-items">
+                    <span class="arch-item">Firebase Auth (Google OAuth)</span>
+                    <span class="arch-item">Hardware ID Nativo</span>
+                    <span class="arch-item">Firestore Database</span>
+                    <span class="arch-item">License Validation API</span>
+                </div>
+            </div>
+
+            <div class="arch-layer fade-in">
+                <div class="arch-title">CAMADA DE BUILD</div>
+                <div class="arch-items">
+                    <span class="arch-item">Chromium Source (~30GB)</span>
+                    <span class="arch-item">GN Build System</span>
+                    <span class="arch-item">Ninja Compiler</span>
+                    <span class="arch-item">Visual Studio 2022 C++</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="numeros">
+        <h2 class="section-title">Validacao de Mercado</h2>
+        <p class="section-subtitle">Resultados da primeira semana - vendas 100% organicas</p>
+
+        <div class="stats-grid">
+            <div class="stat-item fade-in">
+                <div class="stat-number">R$ 5.248</div>
+                <div class="stat-label">Vendas na 1a Semana</div>
+            </div>
+            <div class="stat-item fade-in">
+                <div class="stat-number">0%</div>
+                <div class="stat-label">Cancelamentos</div>
+            </div>
+            <div class="stat-item fade-in">
+                <div class="stat-number">30+</div>
+                <div class="stat-label">Leads Aguardando</div>
+            </div>
+            <div class="stat-item fade-in">
+                <div class="stat-number">3-10x</div>
+                <div class="stat-label">Aumento Produtividade</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="modelo">
+        <h2 class="section-title">Modelo de Negocio</h2>
+        <p class="section-subtitle">Estrutura de planos para o ecossistema</p>
+
+        <div class="pricing-grid">
+            <div class="pricing-card fade-in">
+                <div class="plan-name">Basico</div>
+                <div class="plan-price">R$ 197<span>/mes</span></div>
+                <ul class="plan-features">
+                    <li>5 Extensoes Principais</li>
+                    <li>VEO3 Automator</li>
+                    <li>Tradutor Universal</li>
+                    <li>Auto Downloader</li>
+                    <li>Suporte por Email</li>
+                </ul>
+                <button class="btn btn-secondary" style="width: 100%;">Para Club</button>
+            </div>
+
+            <div class="pricing-card featured fade-in">
+                <div class="plan-name">VIP</div>
+                <div class="plan-price">R$ 397<span>/mes</span></div>
+                <ul class="plan-features">
+                    <li>17+ Extensoes Completas</li>
+                    <li>Mass Prompter Multi-IA</li>
+                    <li>Suno Automator</li>
+                    <li>Midjourney Auto</li>
+                    <li>Suporte Prioritario</li>
+                    <li>Atualizacoes Antecipadas</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%;">Para Legacy</button>
+            </div>
+
+            <div class="pricing-card fade-in">
+                <div class="plan-name">Gold</div>
+                <div class="plan-price">R$ 1.000<span>/mes</span></div>
+                <ul class="plan-features">
+                    <li>Tudo do VIP +</li>
+                    <li>Nardoto Browser Exclusivo</li>
+                    <li>Desenvolvimento Sob Demanda</li>
+                    <li>Consultoria Tecnica</li>
+                    <li>Acesso Antecipado Features</li>
+                    <li>Suporte 24h WhatsApp</li>
+                </ul>
+                <button class="btn btn-secondary" style="width: 100%;">Para Gold</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="tecnico">
+        <h2 class="section-title">Detalhes Tecnicos</h2>
+        <p class="section-subtitle">Para o programador: como funciona por baixo dos panos</p>
+
+        <div class="tech-grid">
+            <div class="tech-card fade-in">
+                <h3>🔧 Build do Chromium</h3>
+                <ul>
+                    <li>Fonte: chromium.googlesource.com (~58GB)</li>
+                    <li>Compilacao: 4-8 horas com Ninja</li>
+                    <li>Toolchain: Visual Studio 2022 + Python 3.11</li>
+                    <li>Output: Executavel standalone (~200MB)</li>
+                </ul>
+                <div class="code-block">
+                    <span class="comment">// args.gn - Config de build</span><br>
+                    <span class="keyword">is_official_build</span> = <span class="string">true</span><br>
+                    <span class="keyword">enable_reporting</span> = <span class="string">false</span><br>
+                    <span class="keyword">safe_browsing_mode</span> = <span class="string">0</span><br>
+                    <span class="keyword">enable_extensions</span> = <span class="string">true</span>
+                </div>
+            </div>
+
+            <div class="tech-card fade-in">
+                <h3>🔐 Sistema de Licenca</h3>
+                <ul>
+                    <li>Auth: Firebase + Google OAuth</li>
+                    <li>Hardware Lock: CPU ID + Motherboard Serial</li>
+                    <li>Database: Firestore com rules</li>
+                    <li>Validacao: REST API em cada inicializacao</li>
+                </ul>
+                <div class="code-block">
+                    <span class="comment">// Validacao de licenca nativa</span><br>
+                    <span class="keyword">const</span> hwId = <span class="string">getHardwareFingerprint()</span>;<br>
+                    <span class="keyword">const</span> valid = <span class="string">await validateLicense(hwId)</span>;<br>
+                    <span class="keyword">if</span> (!valid) <span class="string">blockBrowser()</span>;
+                </div>
+            </div>
+
+            <div class="tech-card fade-in">
+                <h3>⚡ Otimizacoes de Performance</h3>
+                <ul>
+                    <li>Background timer throttling: DISABLED</li>
+                    <li>Renderer backgrounding: DISABLED</li>
+                    <li>Occluded windows: FULL SPEED</li>
+                    <li>Component extensions: PRE-LOADED</li>
+                </ul>
+                <div class="code-block">
+                    <span class="comment">// Flags de inicializacao</span><br>
+                    <span class="string">--disable-background-timer-throttling</span><br>
+                    <span class="string">--disable-renderer-backgrounding</span><br>
+                    <span class="string">--disable-backgrounding-occluded-windows</span>
+                </div>
+            </div>
+
+            <div class="tech-card fade-in">
+                <h3>📦 Distribuicao</h3>
+                <ul>
+                    <li>Formato: Installer NSIS ou MSI</li>
+                    <li>Atualizacoes: Omaha (Google Update fork)</li>
+                    <li>Tamanho: ~150-200MB comprimido</li>
+                    <li>Plataformas: Windows 10/11 (Mac futuro)</li>
+                </ul>
+                <div class="code-block">
+                    <span class="comment">// Estrutura de instalacao</span><br>
+                    <span class="string">C:\Program Files\NardotoBrowser\</span><br>
+                    <span class="string">├── nardoto.exe</span><br>
+                    <span class="string">├── extensions\</span><br>
+                    <span class="string">└── resources\</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Apresentacao Confidencial - Nardoto Browser © 2025</p>
+        <p style="margin-top: 0.5rem;">Contato: tharcisionardoto@gmail.com</p>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Fade in on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Animate stats numbers
+        function animateNumber(el, target) {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    el.textContent = target.toLocaleString('pt-BR');
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(current).toLocaleString('pt-BR');
+                }
+            }, 30);
+        }
+
+        // Trigger number animation when stats section is visible
+        const statsSection = document.querySelector('#numeros');
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Only animate once
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statsObserver.observe(statsSection);
+    </script>
+</body>
+</html>
